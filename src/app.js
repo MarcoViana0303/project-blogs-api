@@ -1,5 +1,5 @@
 const express = require('express');
-const routerLogin = require('./routes/routeLogin')
+const routerLogin = require('./routes/routeLogin');
 const routerUser = require('./routes/routeUser');
 // ...
 
