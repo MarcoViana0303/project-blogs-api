@@ -9,10 +9,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      displayName: {
+      display_name: {
         type: Sequelize.STRING,
         allowNull: false,
-        field: 'display_name',
       },
       email: {
         type: Sequelize.STRING,
@@ -29,7 +28,7 @@ module.exports = {
     });
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface, _Sequelize) => {
     await queryInterface.dropTable('users');
   }
 };
