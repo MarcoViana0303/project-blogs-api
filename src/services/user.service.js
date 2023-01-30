@@ -1,9 +1,8 @@
 const { User } = require('../models');
-const { validateUser } = require('./validations/validateInput')
-const JWT = require('../utils/JWT')
+const { validateUser } = require('./validations/validateInput');
+const JWT = require('../utils/JWT');
 
 const postUser = async (body) => {
-
     const error = validateUser(body);
     if (error) {
       return { type: 400, message: error };
@@ -29,6 +28,13 @@ const postUser = async (body) => {
     return { type: 201, message: { token } };
 };
 
+const getAllUsers = async () => {
+  const users = await User.findAll({ attributes: { exclude: ['password'] } });
+
+  return users;
+};
+
 module.exports = {
     postUser,
+    getAllUsers,
 };
