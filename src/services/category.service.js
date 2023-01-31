@@ -13,6 +13,12 @@ const postCategory = async ({ id, name }) => {
     return { type: 201, message: categoryName };
 };
 
+const getAllCategories = async () => {
+    const result = await Category.findAll();
+    return result;
+};
+
 module.exports = {
     postCategory,
+    getAllCategories,
 };
