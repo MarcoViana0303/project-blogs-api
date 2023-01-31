@@ -8,9 +8,15 @@ const categoryPost = async (req, res) => {
     return res.status(type).json(message);
 };
 
-const allCategories = async (req, res) => {
-    const result = await getAllCategories();
-    return res.status(200).json(result);
+const allCategories = async (_req, res) => {
+    
+    try {
+        const categories = await getAllCategories();
+        return res.status(200).json(categories);
+    
+      } catch (e) {
+        res.status(500).json({ message: 'Ocorreu um erro' });
+      }
 };
 
 module.exports = {
