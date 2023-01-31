@@ -8,23 +8,15 @@ const postUser = async (body) => {
       return { type: 400, message: error };
     }
     const { displayName, email, password, image } = body;
-  
     const allUsers = await User.findAll();
     const user = allUsers.find(
       (e) => e.email === email && e.password === password,
     );
-  
-    if (user) return { type: 409, message: 'User already registered' };
-  
-    await User.create({
-      displayName,
-      email,
-      password,
-      image,
-    });
-  
+    if (user) { 
+      return { type: 409, message: 'User already registered' };
+     }
+    await User.create({ displayName, email, password, image });
     const token = JWT.generateToken({ displayName, email, image });
-  
     return { type: 201, message: { token } };
 };
 
@@ -34,7 +26,17 @@ const getAllUsers = async () => {
   return users;
 };
 
+const getById = async (id) => {
+  const user = await User.findOne({ 
+    attributes: ['id', 'displayName', 'email', 'image'],
+     where: { id }, 
+    });
+ 
+  return user;
+};
+
 module.exports = {
     postUser,
     getAllUsers,
+    getById,
 };
