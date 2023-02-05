@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
          type: DataTypes.INTEGER,
          primaryKey: true, 
          autoIncrement: true,
+         allowNull: false,
          },
 
       name: DataTypes.STRING,
@@ -12,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       timestamps: false,
       tableName: 'categories',
+      underscored: true
     });
   
     //  UserModel.associate = (models) => {

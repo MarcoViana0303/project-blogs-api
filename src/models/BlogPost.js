@@ -6,28 +6,55 @@ module.exports = (sequelize, DataTypes) => {
          autoIncrement: true,
          },
 
-      title: DataTypes.STRING,
+       title: {
+          type: DataTypes.STRING,
+        },
 
-      content: DataTypes.STRING,
+     content: {
+          type: DataTypes.STRING,
+        },
 
-      userId: { type: DataTypes.INTEGER, foreignKey: true },
+      userId: { type: DataTypes.INTEGER },
 
-      published: DataTypes.DATE,
+      published: {
+        type: DataTypes.DATE,
+      },
 
-      updated: DataTypes.DATE,
+      updated: {
+        type: DataTypes.DATE,
+      },
      
     },
     {
-      timestamps: false,
+      timestamps: true,
       underscored: true,
-      tableName: 'categories',
+      tableName: 'blog_posts',
+      createdAt: 'published',
+      updatedAt: 'updated',
     });
   
-      BlogPostModel.associate = ({ User }) => {
+      BlogPostModel.associate = ({ User, Category }) => {
         BlogPostModel.belongsTo(User, {
-            foreignKey: 'user_id'
+            foreignKey: 'user_id',
+             as: 'user'
         })
+        
+           BlogPostModel.hasMany(Category, {
+             foreignKey: 'id',
+             as: 'categories',
+           })
      };
   
      return BlogPostModel;
   };
+
+  
+     
+     
+     
+    
+     
+   
+    
+   
+    
